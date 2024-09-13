@@ -11,6 +11,12 @@ const getPinyinString = (input) => {
     return output;
 };
 
+const imageMimeTypes = [
+    { type:'image/png' , suffix: 'png'},
+    { type: 'image/jpeg', suffix: 'jpg'}
+];
+
 module.exports = {
-    getPinyinString
+    getPinyinString,
+    imageMimeTypes
 };
