@@ -18,6 +18,7 @@
     "koa-static": "^5.0.0",
     "koa2-cors": "^2.0.6",
     "module-alias": "^2.2.3",
+    "mysql2": "^3.11.2",
     "pinyin": "^4.0.0-alpha.2"
   },
   "devDependencies": {
@@ -27,6 +28,7 @@
     "@dataSource": "./dataSource",
     "@tool": "./tool",
     "@symbols": "./symbols",
-    "@routers": "./routers"
+    "@routers": "./routers",
+    "@connection": "./routers/connection"
   }
 }

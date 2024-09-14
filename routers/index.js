@@ -7,8 +7,8 @@ Object.keys(postRouters).forEach((key)=> {
     router.post(key, postRouters[key]);
 });
 
-Object.keys(getRouters).forEach((key)=> {
-    router.post(key, getRouters[key]);
+Object.keys(getRouters).forEach((key)=> {    
+    router.get(key, getRouters[key]);
 });
 
 module.exports = router;

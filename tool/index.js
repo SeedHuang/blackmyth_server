@@ -16,7 +16,26 @@ const imageMimeTypes = [
     { type: 'image/jpeg', suffix: 'jpg'}
 ];
 
+const makeSuccessBody = ({ code = 200, data, message = 'success'}) => {
+    return {
+        code,
+        message,
+        data : {
+            ...data
+        }
+    }
+};
+
+const makeFailedBody = ( {code = 55555, message = 'Failed'}) => {
+    return {
+        code,
+        message
+    }
+};
+
 module.exports = {
     getPinyinString,
-    imageMimeTypes
+    imageMimeTypes,
+    makeSuccessBody,
+    makeFailedBody
 };

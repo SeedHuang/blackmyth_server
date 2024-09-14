@@ -19,6 +19,7 @@ app.use(cors({
     allowMethods: ['GET', 'POST', 'DELETE', 'OPTION'],
     allowHeaders: ['Content-Type', 'Authorization', 'Accept']
 }));
+
 app.use(router.routes()).use(router.allowedMethods());
 
 app.listen(4000, ()=>{

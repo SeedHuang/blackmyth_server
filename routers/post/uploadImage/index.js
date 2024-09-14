@@ -1,7 +1,7 @@
 const multer = require('koa-multer');
 const path = require('path');
 const fs = require('fs');
-const { imageMimeTypes } = require('@tool');
+const { imageMimeTypes, makeSuccessBody, makeFailedBody } = require('@tool');
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -25,16 +25,12 @@ const upload = multer({ storage });
 
 module.exports =  {
     '/write/uploadimage': async (ctx) => {
-        console.log('uploading...');
-        console.log(path.resolve('upload/images'));
-        await upload.single('image')(ctx);
-        const { filename } = ctx.req.file;
-        ctx.body = {
-            code: 200,
-            message: 'uploaded succeed',
-            data: {
-                filename: `//localhost:4000/upload/images/${filename}`
-            }
+        try {
+            await upload.single('image')(ctx);
+            const { filename } = ctx.req.file;
+            ctx.body = makeSuccessBody({message: '上传成功', data: {filename: `//localhost:4000/upload/images/${filename}`}})
+        } catch (e) {
+            ctx.body = makeFailedBody({message: `上传失败:${e}`})
         }
     }
 };
