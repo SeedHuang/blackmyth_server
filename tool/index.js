@@ -1,5 +1,5 @@
 const { pinyin } = require('pinyin');
-
+const { openBlackmythConnection } = require('@connection');
 const getPinyinString = (input) => {
     const result = pinyin(input, {
         style: pinyin.STYLE_NORMAL, // 设置为不带音调的拼音风格  
@@ -33,9 +33,22 @@ const makeFailedBody = ( {code = 55555, message = 'Failed'}) => {
     }
 };
 
+const simpleGet = async (ctx, funcBody) => {
+    const connection = await openBlackmythConnection();
+    ctx.connection = connection;
+    try {
+        await funcBody(ctx);
+    } catch(e) {
+        ctx.body = makeFailedBody({'message': e.message});
+    } finally {
+        await connection.end();
+    }
+};
+
 module.exports = {
     getPinyinString,
     imageMimeTypes,
     makeSuccessBody,
-    makeFailedBody
+    makeFailedBody,
+    simpleGet
 };

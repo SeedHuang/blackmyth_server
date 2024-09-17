@@ -10,6 +10,7 @@ const { makeSuccessBody, makeFailedBody } = require('@tool');
 module.exports = {
     '/write/addUnitInfo': async (ctx) => {
         const { title, breif, detail, cate, imageUrl } = ctx.request.body;
+        console.log('add unif info', title, breif, detail, cate, imageUrl);
         if(cates[cate]) {
             const id = getPinyinString(title);
             const tableName = 'npcs';
@@ -21,7 +22,9 @@ module.exports = {
                 );
                 await connect.end(); // 不要忘记关闭连接  
                 ctx.body = makeSuccessBody({message: '添加成功', data: {id}})
+                console.log('add success');
             } catch(error) {
+                console.log(error);
                 ctx.body = makeFailedBody({message: `添加单位失败：${error}`});
             }
         }
