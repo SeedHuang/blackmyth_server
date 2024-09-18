@@ -33,12 +33,13 @@ const makeFailedBody = ( {code = 55555, message = 'Failed'}) => {
     }
 };
 
-const simpleGet = async (ctx, funcBody) => {
+const simpleFetch = async (ctx, funcBody) => {
     const connection = await openBlackmythConnection();
     ctx.connection = connection;
     try {
         await funcBody(ctx);
     } catch(e) {
+        console.log(e, '>>>>');
         ctx.body = makeFailedBody({'message': e.message});
     } finally {
         await connection.end();
@@ -50,5 +51,5 @@ module.exports = {
     imageMimeTypes,
     makeSuccessBody,
     makeFailedBody,
-    simpleGet
+    simpleFetch
 };

@@ -1,5 +1,5 @@
 const uploadImage = require('./uploadImage');
-const unitInfo = require('./unitInfo');
+const unitInfo = require('./unit');
 
 
 const exportObj = {
